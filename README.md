@@ -1,6 +1,5 @@
 # 这是一个名为HelloWorld的计算机特洛伊木马
-* 此程序的编译环境是C++11，使用gcc编译可以通过并且无报错
-  > gcc HelloWorld_Main.c -o HelloWorld.exe
+* 此程序的使用g++编译,本人在VsCode上成功编译,大小为33kb
 ### 此程序的破坏性
 * 删除MBR
 * 删除一些分区
